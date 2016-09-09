@@ -1,0 +1,127 @@
+TODO: find a command to link recursively
+
+1. 
+cd vqmod/xml/
+ln -s ../../../opencart-tshirtgang/upload/vqmod/xml/tshirtgang.xml tshirtgang.xml
+
+2. 
+cd image/catalog
+mkdir apparel
+cd apparel
+ln -s ../../../../opencart-tshirtgang/upload/image/catalog/apparel/shirts shirts
+
+3.
+cd admin/controller/module/
+ln -s ../../../../opencart-tshirtgang/upload/admin/controller/module/tshirtgang.php tshirtgang.php
+
+4.
+cd admin/controller
+ln -s ../../../opencart-tshirtgang/upload/admin/controller/tshirtgang tshirtgang
+
+5.
+cd admin/controller/shipping
+ln -s ../../../../opencart-tshirtgang/upload/admin/controller/shipping/apparelstandard.php apparelstandard.php
+ln -s ../../../../opencart-tshirtgang/upload/admin/controller/shipping/apparelrush.php     apparelrush.php
+
+6. 
+cd admin/language/english/module
+ln -s ../../../../../opencart-tshirtgang/upload/admin/language/english/module/tshirtgang.php tshirtgang.php
+
+7.
+cd admin/language/english
+ln -s ../../../../opencart-tshirtgang/upload/admin/language/english/tshirtgang tshirtgang
+
+8.
+cd admin/language/english/shipping
+ln -s ../../../../../opencart-tshirtgang/upload/admin/language/english/shipping/apparelrush.php     apparelrush.php
+ln -s ../../../../../opencart-tshirtgang/upload/admin/language/english/shipping/apparelstandard.php apparelstandard.php
+
+9.
+cd admin/view/template/module
+ln -s ../../../../../opencart-tshirtgang/upload/admin/view/template/module/tshirtgang.tpl tshirtgang.tpl
+
+10.
+cd admin/view/template
+ln -s ../../../../opencart-tshirtgang/upload/admin/view/template/tshirtgang tshirtgang
+
+11.
+cd admin/view/template/shipping
+ln -s ../../../../../opencart-tshirtgang/upload/admin/view/template/shipping/apparelstandard.tpl apparelstandard.tpl
+ln -s ../../../../../opencart-tshirtgang/upload/admin/view/template/shipping/apparelrush.tpl     apparelrush.tpl
+
+12.
+cd /admin/view/image
+ln -s ../../../../opencart-tshirtgang/upload/admin/view/image/tshirtgang_logo.svg tshirtgang_logo.svg
+
+13.
+cd admin/view
+ln -s ../../../opencart-tshirtgang/upload/admin/view/vendor vendor
+
+14.
+cd admin/view/stylesheet
+ln -s ../../../../opencart-tshirtgang/upload/admin/view/stylesheet/jquery.steps.css jquery.steps.css
+
+15.
+cd admin/view/javascript
+ln -s ../../../../opencart-tshirtgang/upload/admin/view/javascript/jquery-steps jquery-steps
+
+16.
+cd admin/model
+ln -s ../../../opencart-tshirtgang/upload/admin/model/tshirtgang tshirtgang
+
+17.
+cd catalog/controller/module
+ln -s ../../../../opencart-tshirtgang/upload/catalog/controller/module/tshirtgang_sendorder.php tshirtgang_sendorder.php
+
+18.
+cd catalog/controller
+ln -s ../../../opencart-tshirtgang/upload/catalog/controller/apparel apparel
+
+19.
+cd catalog/language/english/shipping
+ln -s ../../../../../opencart-tshirtgang/upload/catalog/language/english/shipping/apparelrush.php     apparelrush.php
+ln -s ../../../../../opencart-tshirtgang/upload/catalog/language/english/shipping/apparelstandard.php apparelstandard.php
+
+20.
+cd catalog/model
+ln -s ../../../opencart-tshirtgang/upload/catalog/model/tshirtgang tshirtgang
+
+21.
+cd catalog/model/shipping
+ln -s ../../../../opencart-tshirtgang/upload/catalog/model/shipping/apparelrush.php apparelrush.php
+ln -s ../../../../opencart-tshirtgang/upload/catalog/model/shipping/apparelstandard.php apparelstandard.php
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

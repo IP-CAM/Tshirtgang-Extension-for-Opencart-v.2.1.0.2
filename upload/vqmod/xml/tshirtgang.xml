@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification
+            xmlns="https://github.com/vqmod/vqmod"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="https://github.com/vqmod/vqmod https://raw.githubusercontent.com/vqmod/vqmod/master/vqmod.xsd">
+            >
+  <id>Tshirtgang Opencart 2.X Module</id>
+  <version>2.0</version>
+  <vqmver>2.5</vqmver>
+  <author>Wally</author>
+  <file name="admin/controller/common/menu.php">
+      <operation>
+          <search position="after"><![CDATA[
+          $data['text_openbay_order_import'] = $this->language->get('text_openbay_order_import');
+          ]]></search>
+          <add><![CDATA[
+          $data['text_tshirtgang_menu'] = $this->language->get('text_tshirtgang_menu');
+          $data['text_tshirtgang_pricing'] = $this->language->get('text_tshirtgang_pricing');
+          $data['text_tshirtgang_currentproducts'] = $this->language->get('text_tshirtgang_currentproducts');
+          $data['text_tshirtgang_addproducts'] = $this->language->get('text_tshirtgang_addproducts');
+          $data['text_tshirtgang_categories'] = $this->language->get('text_tshirtgang_categories');
+          $data['text_tshirtgang_sales'] = $this->language->get('text_tshirtgang_sales');
+          ]]></add>
+      </operation>
+      <operation>
+          <search position="before"><![CDATA[
+          return $this->load->view('common/menu.tpl', $data);
+          ]]></search>
+          <add><![CDATA[
+          $data['tshirtgang_pricing'] = $this->url->link('tshirtgang/pricing', 'token=' . $this->session->data['token'], 'SSL');
+          $data['tshirtgang_currentproducts'] = $this->url->link('tshirtgang/currentproducts', 'token=' . $this->session->data['token'], 'SSL');
+          $data['tshirtgang_addproduct'] = $this->url->link('tshirtgang/addproduct', 'token=' . $this->session->data['token'], 'SSL');
+          $data['tshirtgang_categories'] = $this->url->link('tshirtgang/categories', 'token=' . $this->session->data['token'], 'SSL');
+          $data['tshirtgang_sales'] = $this->url->link('tshirtgang/sales', 'token=' . $this->session->data['token'], 'SSL');
+          ]]></add>
+      </operation>
+  </file>
+  <file name="admin/language/english/common/menu.php">
+      <operation>
+          <search position="after"><![CDATA[
+          $_['text_paypal_search']               = 'Search';
+          ]]></search>
+          <add><![CDATA[
+          $_['text_tshirtgang_menu']             = 'Tshirtgang';
+          $_['text_tshirtgang_pricing']          = 'Pricing';
+          $_['text_tshirtgang_currentproducts']  = 'Current Products';
+          $_['text_tshirtgang_addproducts']      = 'Add Product';
+          $_['text_tshirtgang_categories']       = 'Categories';
+          $_['text_tshirtgang_sales']            = 'Sales';
+          ]]></add>
+      </operation>
+  </file>
+  <file name="admin/view/template/common/menu.tpl">
+      <operation>
+          <search position="before"><![CDATA[
+          <li id="extension"><a class="parent"><i class="fa fa-puzzle-piece fa-fw"></i> <span><?php echo $text_extension; ?></span></a>
+          ]]></search>
+          <add><![CDATA[
+          <?php
+          $this->model('setting/setting');
+          $tshirtgang_setting = $this->registry->get('model_setting_setting')->getSetting('tshirtgang');
+          if( isset($tshirtgang_setting['tshirtgang_status']) && $tshirtgang_setting['tshirtgang_status'] == '1') {
+          ?>
+          <li id="catalog"><a class="parent"><img src="view/image/tshirtgang_logo.svg" alt="Tshirtgang" height="18" width="24"> <span><?php echo $text_tshirtgang_menu; ?></span></a>
+            <ul>
+              <li><a href="<?php echo $tshirtgang_pricing; ?>"><?php echo $text_tshirtgang_pricing; ?></a></li>
+              <li><a href="<?php echo $tshirtgang_currentproducts; ?>"><?php echo $text_tshirtgang_currentproducts; ?></a></li>
+              <!--<li><a href="<?php echo $tshirtgang_addproduct; ?>"><?php echo $text_tshirtgang_addproducts; ?></a></li>-->
+              <!--<li><a href="<?php echo $tshirtgang_categories; ?>"><?php echo $text_tshirtgang_categories; ?></a></li>-->
+              <li><a href="<?php echo $tshirtgang_sales; ?>"><?php echo $text_tshirtgang_sales; ?></a></li>
+            </ul>
+          </li>
+          <?php
+          }
+          ?>
+          ]]></add>
+      </operation>
+  </file>
+  <file name="system/library/cart.php">
+      <operation>
+          <search position="before"><![CDATA[
+          // Reward Points
+          ]]></search>
+          <add><![CDATA[
+          // TSG Product
+          $tsg_product = $this->db->query("SELECT ocp.mpn FROM " . DB_PREFIX . "product ocp LEFT JOIN " . DB_PREFIX . "tshirtgang_products tsgp ON tsgp.product_id = ocp.product_id WHERE ocp.product_id='" . (int)$cart['product_id'] . "'");
+          if($tsg_product->num_rows){
+            $price = 0; // price will be determined by options
+          }
+          ]]></add>
+      </operation>
+  </file>
+  <file name="catalog/controller/product/product.php">
+      <operation>
+          <search position="before"><![CDATA[
+          if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/product/product.tpl')) {
+          ]]></search>
+          <add><![CDATA[
+          $this->load->model('tshirtgang/products');
+          $data['isTsg'] = $this->model_tshirtgang_products->isTsg($product_id);
+          $this->load->model('setting/setting');
+          $tshirtgang_setting = $this->model_setting_setting->getSetting('tshirtgang');
+          $data['isTsgEnabled'] = $tshirtgang_setting['tshirtgang_status'] == '1'? true:false;
+          ]]></add>
+      </operation>
+  </file>  
+  <file name="catalog/controller/total/shipping.php">
+      <operation>
+          <search position="before"><![CDATA[
+          if ($this->config->get($result['code'] . '_status')) {
+          ]]></search>
+          <add><![CDATA[
+          if($result['code']=='apparelrush' && !($country=='United States'||$country=='Canada')) continue;
+          ]]></add>
+      </operation>
+  </file>
+  <file name="catalog/view/theme/default/template/product/product.tpl">
+      <operation>
+          <search position="replace"><![CDATA[
+          <h2><?php echo $price; ?></h2>
+          ]]></search>
+          <add><![CDATA[
+          <h2><span id="price-placeholder"><?php echo $price; ?></span></h2>
+          ]]></add>
+      </operation>
+      <operation>
+          <search position="replace"><![CDATA[
+          <option value="<?php echo $option_value['product_option_value_id']; ?>"><?php echo $option_value['name']; ?>
+          ]]></search>
+          <add><![CDATA[
+          <?php if(isset($isTsg) && $isTsg) {?><option value="<?php echo $option_value['product_option_value_id']; ?>"><?php echo $option_value['name']; ?></option><?php } else { ?>
+          <option value="<?php echo $option_value['product_option_value_id']; ?>"><?php echo trim($option_value['name']); ?>
+          ]]></add>
+      </operation>
+      <operation>2
+          <search position="replace"  index="1"><![CDATA[
+          (<?php echo $option_value['price_prefix']; ?><?php echo $option_value['price']; ?>)
+          ]]></search>
+          <add><![CDATA[
+          (<?php echo $option_value['price_prefix']; ?><?php echo $option_value['price']; ?>)<?php } ?>
+          ]]></add>
+      </operation>
+      <operation>
+          <search position="replace"><![CDATA[
+          <button type="button" id="button-cart" data-loading-text="<?php echo $text_loading; ?>" class="btn btn-primary btn-lg btn-block"><?php echo $button_cart; ?></button>
+          ]]></search>
+          <add><![CDATA[
+          <?php if(isset($isTsg) && $isTsg) {?>
+          <?php if($isTsgEnabled) {?>
+          <button type="button" id="button-cart" data-loading-text="<?php echo $text_loading; ?>" class="btn btn-primary btn-lg btn-block"><?php echo $button_cart; ?></button>
+          <?php } else { ?>
+          <button disabled  title="Disabled" type="button" id="button-cart" data-loading-text="<?php echo $text_loading; ?>" class="btn btn-primary btn-lg btn-block"><?php echo $button_cart; ?></button>
+          <?php } ?>
+          <?php } else { ?>
+          <button type="button" id="button-cart" data-loading-text="<?php echo $text_loading; ?>" class="btn btn-primary btn-lg btn-block"><?php echo $button_cart; ?></button>
+          <?php } ?>
+          ]]></add>
+      </operation>
+      <operation>
+          <search position="before"><![CDATA[
+          <?php echo $footer; ?>
+          ]]></search>
+          <add><![CDATA[
+          <script type="text/javascript"><!--
+          <?php if(isset($isTsg) && $isTsg) {?>
+          ocp_product_id = <?php echo $product_id; ?>;
+          tsg_product_id = '';
+          apparel_options = {}; // extract original options from html selects
+          apparel_available_options = {};
+          options_ids = {};
+          function colorChanged(selectedcolor, samestyle) { 
+            var selectobject = document.getElementById("input-option"+options_ids['Tshirt Style'] );
+            for(var i=selectobject.length-1; i > -1; i--){ // loop backwards to work properly
+              if(selectobject.options[i].value != ''){ // skip --- Please Select --- with '' value
+                if(selectobject.options[i]['text'] == samestyle){
+                  selectobject.selectedIndex = i;
+                }
+                var found = true;
+                if(typeof apparel_available_options.colors_styles != 'undefined'){
+                  found = $.inArray(selectobject.options[i].text, apparel_available_options.colors_styles[selectedcolor]) > -1;
+                } else {
+                  found = false;
+                }
+                if(found == false){
+                  selectobject.remove(i);
+                }
+              }
+            }
+          }
+          function styleChanged(selectedstyle,samecolor) {
+            var selectobject = document.getElementById("input-option"+options_ids['Tshirt Color'] );
+            for(var i=selectobject.length-1; i > -1; i--){ // loop backwards to work properly
+              if(selectobject.options[i].value != ''){ // skip --- Please Select --- with '' value
+                if(selectobject.options[i]['text'] == samecolor){///
+                  selectobject.selectedIndex = i;
+                }
+                var found = $.inArray(selectobject.options[i].text, apparel_available_options.styles_colors[selectedstyle]) > -1;
+                if(found == false){
+                  selectobject.remove(i);
+                }
+              }
+            }
+          }
+          function updateSize(samestyle,samecolor){
+            var selectobject = document.getElementById("input-option"+options_ids['Tshirt Size']);
+            for(var i=selectobject.length-1; i > -1; i--){ // loop backwards to work properly
+              if(selectobject.options[i].value != ''){ // skip --- Please Select --- with '' value
+                var found = false;
+                if(typeof apparel_available_options['styles_colors_sizes'][samestyle] != 'undefined'){
+                  found = $.inArray(selectobject.options[i].text, apparel_available_options['styles_colors_sizes'][samestyle][samecolor]) > -1;
+                } else {
+                  found = false;
+                }
+                if(found == false){
+                  selectobject.remove(i);
+                }
+              } else {
+                selectobject.options[i].setAttribute('selected', true);
+              }
+            }
+          }
+          function restoreOriginalOptions(to_restore){
+            for (var tr=0; tr < to_restore.length; tr++) {
+              var key = 'input-option'+to_restore[tr];
+              var selectobject = document.getElementById(key);
+              var selected_option_text = selectobject.options[selectobject.selectedIndex].text;
+              // erase all options
+              for(var i=selectobject.length-1; i > -1; i--){ // loop backwards // change to remove index 0 length times (for readability)
+                selectobject.remove(i);
+              }
+              // put back original options
+              for (var i = 0; i < apparel_options[key].length; i++) {
+                var key2 = Object.keys(apparel_options[key][i])[0];
+                var newoption = document.createElement("option");
+                newoption.text = key2;
+                newoption.value = apparel_options[key][i][key2];
+                selectobject.add(newoption);
+                // restore previous selection
+                if(selected_option_text == key2){
+                  selectobject.selectedIndex = i;
+                }
+              }
+            }
+          }
+          // by Mike Cao from https://gist.github.com/mikecao/65d9fc92dc7197cb8a7c
+          function sharpen(ctx, w, h, mix) { // sharpen image
+            var weights = [0, -1, 0, -1, 5, -1, 0, -1, 0];
+            var katet = Math.round(Math.sqrt(weights.length));
+            var half = (katet * 0.5) | 0;
+            var dstData = ctx.createImageData(w, h);
+            var dstBuff = dstData.data;
+            var srcBuff = ctx.getImageData(0, 0, w, h).data;
+            var y = h;
+            while (y--) {
+              x = w;
+              while (x--) {
+                var sy = y;
+                var sx = x;
+                var dstOff = (y * w + x) * 4;
+                var r = 0;
+                var g = 0;
+                var b = 0;
+                var a = 0;
+                for (var cy = 0; cy < katet; cy++) {
+                  for (var cx = 0; cx < katet; cx++) {
+                    var scy = sy + cy - half;
+                    var scx = sx + cx - half;
+                    if (scy >= 0 && scy < h && scx >= 0 && scx < w) {
+                      var srcOff = (scy * w + scx) * 4;
+                      var wt = weights[cy * katet + cx];
+                      r += srcBuff[srcOff] * wt;
+                      g += srcBuff[srcOff + 1] * wt;
+                      b += srcBuff[srcOff + 2] * wt;
+                      a += srcBuff[srcOff + 3] * wt;
+                    }
+                  }
+                }
+                dstBuff[dstOff] = r * mix + srcBuff[dstOff] * (1 - mix);
+                dstBuff[dstOff + 1] = g * mix + srcBuff[dstOff + 1] * (1 - mix);
+                dstBuff[dstOff + 2] = b * mix + srcBuff[dstOff + 2] * (1 - mix)
+                dstBuff[dstOff + 3] = srcBuff[dstOff + 3];
+              }
+            }
+            ctx.putImageData(dstData, 0, 0);
+          }
+          function updateImage(){
+            var ecolor = document.getElementById('input-option'+options_ids['Tshirt Color']);
+            var color_text = ecolor.options[ecolor.selectedIndex].text;
+            var estyle = document.getElementById('input-option'+options_ids['Tshirt Style']);
+            var style_text = estyle.options[estyle.selectedIndex].text;
+            var new_src = '';
+            var element = document.getElementsByClassName('thumbnail');
+            var ctx_h = parseInt(720); // main value
+            var ctx_w = parseInt(ctx_h * 1.10);
+            var overlay_yoffset = 10;
+            var overlay_xoffset = 10;
+            var overlay_height = 10;
+            var overlay_width = 10;
+            var overlay_h = 10;
+            var overlay_w = 10;
+            var scale_ratio = 1.0;
+            element = element[0];
+            var requiredElement = element.firstChild;
+            if(ecolor.options[ecolor.selectedIndex].value != '' && estyle.options[estyle.selectedIndex].value != '' ){
+              console.log('update image dynamically');
+              /////
+              var c = document.createElement('canvas'); // offscreen canvas
+              var ctx=c.getContext("2d");
+              ctx.canvas.width  = ctx_w;
+              ctx.canvas.height = ctx_h;
+              ctx.imageSmoothingEnabled = true;
+
+              var imageObj1 = new Image();
+              var imageObj2 = new Image();
+              new_src = '/image/catalog/apparel/shirts/'+style_text+'/'+color_text+'.png';
+              new_src = new_src.split(' ').join('_'); // string find-all-replace alternative 
+              imageObj1.src = new_src;
+              imageObj1.onload = function() {
+                // 3 lines below fill background with white color
+                //ctx.rect(0, 0, ctx_w, ctx_h);
+                //ctx.fillStyle = "white";
+                //ctx.fill();
+                ctx.drawImage(imageObj1, parseInt(0), parseInt(0), ctx_w, ctx_h);
+                imageObj2.src = '/image/catalog/apparel/overlay_'+tsg_product_id+'.png';
+                imageObj2.onload = function() {
+                  overlay_height = imageObj2.naturalHeight;
+                  overlay_width  = imageObj2.naturalWidth;
+                  if(style_text == 'Hooded Pullover' || style_text == 'Apron'){
+                    scale_ratio = 172.0/overlay_width;
+                    overlay_h = parseInt(overlay_height * scale_ratio);
+                    overlay_w = parseInt(overlay_width * scale_ratio);
+                    overlay_yoffset = 162;
+                    overlay_xoffset = 310;
+                    ctx.drawImage(imageObj2, overlay_xoffset, overlay_yoffset, overlay_w, overlay_h);
+                  } else {
+                    scale_ratio = 250.0/overlay_width;
+                    overlay_h = parseInt(overlay_height * scale_ratio);
+                    overlay_w = parseInt(overlay_width * scale_ratio);
+                    overlay_yoffset = 162;
+                    overlay_xoffset = 271;
+                    ctx.drawImage(imageObj2, overlay_xoffset, overlay_yoffset, overlay_w, overlay_h);
+                  }
+                  //ctx.drawImage(imageObj2, overlay_xoffset, overlay_yoffset, overlay_w, overlay_h);
+                  sharpen(ctx,ctx_w,ctx_h,0.05);
+                  var img = c.toDataURL("image/png");
+                  element.href = img;
+                  requiredElement.src = img;
+                  if(requiredElement.style) {
+                    requiredElement.style.height = '198px';
+                    requiredElement.style.width = '228px';
+                  }
+                }
+              };
+            }
+          }
+          function updatePricePlaceholder(){
+            var ecolor = document.getElementById('input-option'+options_ids['Tshirt Color']);
+            var estyle = document.getElementById('input-option'+options_ids['Tshirt Style']);
+            var esize  = document.getElementById('input-option'+options_ids['Tshirt Size'] );
+            var eqty   = document.getElementById('input-quantity');
+            if(ecolor.options[ecolor.selectedIndex].value != '' && estyle.options[estyle.selectedIndex].value != '' && esize.options[esize.selectedIndex].value != '' && parseInt(eqty.value) != 0){
+              console.log('update price dynamically');
+              var optdt = {
+                color:{
+                  id: options_ids['Tshirt Color'],
+                  value: ecolor.options[ecolor.selectedIndex].value
+                },
+                style:{
+                  id: options_ids['Tshirt Style'],
+                  value: estyle.options[estyle.selectedIndex].value
+                },
+                size:{
+                  id: options_ids['Tshirt Size'],
+                  value: esize.options[ esize.selectedIndex].value
+                }
+              };
+              //console.log(optdt);
+              $.ajax({
+                url: 'index.php?route=apparel/options/getOptionsPriceSum',
+                type: 'POST',
+                dataType: 'json',
+                cache: false,
+                data: {
+                  product_id: ocp_product_id,
+                  quantity: parseInt(eqty.value),
+                  optionsData: JSON.stringify(optdt),
+                },
+                success:function(json){
+                  //console.log(json);
+                  document.getElementById("price-placeholder").innerHTML = json.new_price;
+                }, // -end- success
+                error: function(xhr, ajaxOptions, thrownError){
+                  alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                  window.onbeforeunload = null;
+                }, // -end- error
+              }); // ajax
+            } else {
+              console.log('price update not possible. at least one option is not selected');
+            }
+          }
+          function colorSelectChanged(){
+            console.log('colorSelectChanged');
+            var ec = document.getElementById('input-option'+options_ids['Tshirt Color']);
+            var selected_color = ec.options[ec.selectedIndex].text;
+            var es = document.getElementById('input-option'+options_ids['Tshirt Style']);
+            var same_style = es.options[es.selectedIndex].text;
+            restoreOriginalOptions([ options_ids['Tshirt Style'], options_ids['Tshirt Size'] ]);
+            colorChanged(selected_color, same_style);
+            updateSize(same_style, selected_color);
+            updatePricePlaceholder();
+            updateImage();
+          }
+          function styleSelectChanged(){
+            console.log('styleSelectChanged');
+            var es = document.getElementById('input-option'+options_ids['Tshirt Style']);
+            var selected_style = es.options[es.selectedIndex].text;
+            var ec = document.getElementById('input-option'+options_ids['Tshirt Color']);
+            var same_color = ec.options[ec.selectedIndex].text;
+            restoreOriginalOptions( [ options_ids['Tshirt Color'], options_ids['Tshirt Size'] ] );
+            styleChanged(selected_style, same_color);
+            updateSize(selected_style, same_color);
+            updatePricePlaceholder();
+            updateImage();
+          }
+          function sizeSelectChanged(){
+            var estyle = document.getElementById('input-option'+options_ids['Tshirt Style']);
+            var selected_size = estyle.options[estyle.selectedIndex].text;
+            if(selected_size != ''){
+              updatePricePlaceholder();
+            }
+          }
+          function quantitySpecifiedChanged(){
+            var eqty   = document.getElementById('input-quantity');
+            if(parseInt(eqty.value) != 0){
+              updatePricePlaceholder();
+            }
+          }
+          $(document).ready(function() {
+            $.ajax({
+              url: 'index.php?route=apparel/options/get',
+              type: 'POST',
+              dataType: 'json',
+              cache: false,
+              data: {
+                product_id: ocp_product_id,
+              },
+              success:function(json){
+                //console.log(json);
+                apparel_available_options = json.options;
+                options_ids               = json.option_ids;
+                tsg_product_id            = json.product_data.id;
+                for (var key in json.option_ids) {
+                  var selectobject = document.getElementById("input-option"+json.option_ids[key]);
+                  apparel_options["input-option"+json.option_ids[key]] = [];
+                  for(var i=0; i < selectobject.length; i++){
+                    apparel_options["input-option"+json.option_ids[key]][i] = {};
+                    apparel_options["input-option"+json.option_ids[key]][i][selectobject.options[i].text] = selectobject.options[i].value;
+                  }
+                }
+                // initial setup 
+                colorChanged(json.product_data.color, json.product_data.style);
+                styleChanged(json.product_data.style, json.product_data.color);
+                updateSize(json.product_data.style, json.product_data.color);
+                updateImage();
+                ////////////
+                document.getElementById('input-option'+json.option_ids['Tshirt Color']).onchange = colorSelectChanged;
+                document.getElementById('input-option'+json.option_ids['Tshirt Style']).onchange = styleSelectChanged;
+                document.getElementById('input-option'+json.option_ids['Tshirt Size']).onchange  = sizeSelectChanged;
+                document.getElementById('input-quantity').onchange  = quantitySpecifiedChanged;
+              }, // -end- success
+              error: function(xhr, ajaxOptions, thrownError){
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                window.onbeforeunload = null;
+              }, // -end- error
+            }); // ajax
+            // more code here
+          });
+          <?php } ?>
+          //--></script>
+          ]]></add>
+      </operation>
+  </file>
+</modification>
