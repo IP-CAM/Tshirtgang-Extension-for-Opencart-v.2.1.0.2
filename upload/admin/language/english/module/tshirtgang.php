@@ -15,6 +15,7 @@ $_['entry_name']       = 'Main Settings';
 $_['entry_status']     = 'Status';
 $_['entry_api_key']    = 'API Key';
 $_['entry_api_id']     = 'API ID';
+$_['entry_tsg_version'] = '2.1.4';
 
 // Help
 $_['help_api_key']     = 'Please obtain your API key by logging to www.tshirtgang.com website';

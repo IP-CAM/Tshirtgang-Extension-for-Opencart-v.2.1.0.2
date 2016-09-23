@@ -65,7 +65,7 @@ class ControllerTshirtgangSales extends Controller {
 			$this->load->model('setting/setting');
 			$tsg_setting = $this->model_setting_setting->getSetting('tshirtgang');
 			$api_key  = $tsg_setting['tshirtgang_api_key'];
-			$api_id   = $tsg_setting['tshirtgang_api_id'];
+			$api_id   = "app-b4448ba35509b642695e"; //$tsg_setting['tshirtgang_api_id'];
 			$api_url  = "https://www.tshirtgang.com/api/GetSellerHistory/";
 			
 			
@@ -80,7 +80,7 @@ class ControllerTshirtgangSales extends Controller {
 					   </OrderInfo>
 					</ProductForm>";
 
-			$port = 443; //($port == null ? (preg_match("/^https/", $url) ? 443 : 80) : $port);
+			$port = (preg_match("/^https/", $api_url) ? 443 : 80);
 			$ch = curl_init(); // initialize curl handle
 			curl_setopt($ch, CURLOPT_URL, $api_url); // set url to post to
 			curl_setopt($ch, CURLOPT_FAILONERROR, 1); // Fail on errors
@@ -97,7 +97,7 @@ class ControllerTshirtgangSales extends Controller {
 			$api_response = curl_exec($ch);
 			//echo "<pre>";var_dump(htmlentities($api_response));echo "</pre>";die;
 			curl_close($ch);
-
+			
 			$seller_history = new SimpleXMLElement($api_response);
 			
 			$to_json = array();

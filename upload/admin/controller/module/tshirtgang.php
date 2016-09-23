@@ -25,36 +25,36 @@ class ControllerModuleTshirtgang extends Controller {
 			PRIMARY KEY (`code`)) DEFAULT CHARSET=utf8"
 		);
 
-		$this->db->query("INSERT INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('UseFlatRate'                     , '1.00')");
-		$this->db->query("INSERT INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('ExcludeStyles'                   , '1.00')");
-		$this->db->query("INSERT INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('WhiteShirt'                      ,'18.00')");
-		$this->db->query("INSERT INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('ColorShirt'                      ,'18.00')");
-		$this->db->query("INSERT INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('RingerShirt'                     ,'18.00')");
-		$this->db->query("INSERT INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('BabyOnePieceIncremental'         , '1.00')");
-		$this->db->query("INSERT INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('LadiesIncremental'               , '1.00')");
-		$this->db->query("INSERT INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('MensFittedIncremental'           , '1.00')");
-		$this->db->query("INSERT INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('HoodieIncremental'               ,'21.99')");
-		$this->db->query("INSERT INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('ApronIncremental'                , '1.00')");
-		$this->db->query("INSERT INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('VneckIncremental'                , '4.00')");
-		$this->db->query("INSERT INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('TanktopIncremental'              , '4.00')");
-		$this->db->query("INSERT INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('FlatRateDomestic'                , '4.95')");
-		$this->db->query("INSERT INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('HoodieFlatRateIncremental'       , '5.00')");
-		$this->db->query("INSERT INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('BackPrint'                       , '5.00')");
-		$this->db->query("INSERT INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('StandardShipping'                , '4.95')");
-		$this->db->query("INSERT INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('InternationalShipping'           , '9.50')");
-		$this->db->query("INSERT INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('RushDomesticShipping'            , '9.50')");
-		$this->db->query("INSERT INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('Shirt_YTHLG_Incremental'         , '0.00')");
-		$this->db->query("INSERT INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('Shirt_XL_Incremental'            , '0.00')");
-		$this->db->query("INSERT INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('Shirt_2XL_Incremental'           , '1.00')");
-		$this->db->query("INSERT INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('Shirt_3XL6XL_Incremental'        , '2.00')");
-		$this->db->query("INSERT INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('US_CAD_YTHLG_Incremental'        , '0.00')");
-		$this->db->query("INSERT INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('US_CAD_2XL_Incremental'          , '0.00')");
-		$this->db->query("INSERT INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('US_CAD_3XL6XL_Incremental'       , '2.00')");
-		$this->db->query("INSERT INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('US_Hoodie_Price'                 ,'10.00')");
-		$this->db->query("INSERT INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('International_YTHLG_Incremental' , '0.00')");
-		$this->db->query("INSERT INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('International_XL2XL_Incremental' , '2.00')");
-		$this->db->query("INSERT INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('International_3XL6XL_Incremental', '6.50')");
-		$this->db->query("INSERT INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('International_Hoodie_Price'      ,'19.99')");
+		$this->db->query("INSERT IGNORE INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('UseFlatRate'                     , '1.00')");
+		$this->db->query("INSERT IGNORE INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('ExcludeStyles'                   , '1.00')");
+		$this->db->query("INSERT IGNORE INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('WhiteShirt'                      ,'18.00')");
+		$this->db->query("INSERT IGNORE INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('ColorShirt'                      ,'18.00')");
+		$this->db->query("INSERT IGNORE INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('RingerShirt'                     ,'18.00')");
+		$this->db->query("INSERT IGNORE INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('BabyOnePieceIncremental'         , '1.00')");
+		$this->db->query("INSERT IGNORE INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('LadiesIncremental'               , '1.00')");
+		$this->db->query("INSERT IGNORE INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('MensFittedIncremental'           , '1.00')");
+		$this->db->query("INSERT IGNORE INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('HoodieIncremental'               ,'21.99')");
+		$this->db->query("INSERT IGNORE INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('ApronIncremental'                , '1.00')");
+		$this->db->query("INSERT IGNORE INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('VneckIncremental'                , '4.00')");
+		$this->db->query("INSERT IGNORE INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('TanktopIncremental'              , '4.00')");
+		$this->db->query("INSERT IGNORE INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('FlatRateDomestic'                , '4.95')");
+		$this->db->query("INSERT IGNORE INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('HoodieFlatRateIncremental'       , '5.00')");
+		$this->db->query("INSERT IGNORE INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('BackPrint'                       , '5.00')");
+		$this->db->query("INSERT IGNORE INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('StandardShipping'                , '4.95')");
+		$this->db->query("INSERT IGNORE INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('InternationalShipping'           , '9.50')");
+		$this->db->query("INSERT IGNORE INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('RushDomesticShipping'            , '9.50')");
+		$this->db->query("INSERT IGNORE INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('Shirt_YTHLG_Incremental'         , '0.00')");
+		$this->db->query("INSERT IGNORE INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('Shirt_XL_Incremental'            , '0.00')");
+		$this->db->query("INSERT IGNORE INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('Shirt_2XL_Incremental'           , '1.00')");
+		$this->db->query("INSERT IGNORE INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('Shirt_3XL6XL_Incremental'        , '2.00')");
+		$this->db->query("INSERT IGNORE INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('US_CAD_YTHLG_Incremental'        , '0.00')");
+		$this->db->query("INSERT IGNORE INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('US_CAD_2XL_Incremental'          , '0.00')");
+		$this->db->query("INSERT IGNORE INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('US_CAD_3XL6XL_Incremental'       , '2.00')");
+		$this->db->query("INSERT IGNORE INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('US_Hoodie_Price'                 ,'10.00')");
+		$this->db->query("INSERT IGNORE INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('International_YTHLG_Incremental' , '0.00')");
+		$this->db->query("INSERT IGNORE INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('International_XL2XL_Incremental' , '2.00')");
+		$this->db->query("INSERT IGNORE INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('International_3XL6XL_Incremental', '6.50')");
+		$this->db->query("INSERT IGNORE INTO `" . DB_PREFIX . "tshirtgang_pricing`(`code`,`price`) VALUES('International_Hoodie_Price'      ,'19.99')");
 
 		// -start- create 'Apparel' category if it does not exist
 		$this->load->model('catalog/category');
@@ -151,7 +151,6 @@ class ControllerModuleTshirtgang extends Controller {
 				)
 			)
 		);
-		
 	}
 
 	public function uninstall() {
@@ -159,7 +158,7 @@ class ControllerModuleTshirtgang extends Controller {
 		if($this->config->get('tshirtgang_delete_on_uninstall') != '1' ){
 			return;
 		}
-
+		$this->reportData("uninstalled");
 		$this->load->model('tshirtgang/products');
 		$current_products = $this->model_tshirtgang_products->getAll();
 
@@ -230,6 +229,7 @@ class ControllerModuleTshirtgang extends Controller {
 		$data['entry_status']  = $this->language->get('entry_status');
 		$data['entry_api_key'] = $this->language->get('entry_api_key');
 		$data['entry_api_id']  = $this->language->get('entry_api_id');
+		$data['entry_tsg_version']  = $this->language->get('entry_tsg_version');
 
 		$data['button_save']   = $this->language->get('button_save');
 		$data['button_cancel'] = $this->language->get('button_cancel');
@@ -290,19 +290,20 @@ class ControllerModuleTshirtgang extends Controller {
 		if (isset($this->request->post['api_key'])) {
 			$data['tshirtgang_api_key'] = $this->request->post['tshirtgang_api_key'];
 		} else {
-			$data['tshirtgang_api_key'] = $this->config->get('tshirtgang_api_key');;
+			$data['tshirtgang_api_key'] = $this->config->get('tshirtgang_api_key');
 		}
 		/*
 		if (isset($this->request->post['api_id'])) {
 			$data['tshirtgang_api_id'] = $this->request->post['tshirtgang_api_id'];
 		} else {
-			$data['tshirtgang_api_id'] = $this->config->get('tshirtgang_api_id');;
+			$data['tshirtgang_api_id'] = $this->config->get('tshirtgang_api_id');
 		}
 		*/
 		if (isset($this->request->post['status'])) {
+			$this->reportData("test");
 			$data['tshirtgang_status'] = $this->request->post['tshirtgang_status'];
 		} else {
-			$data['tshirtgang_status'] = $this->config->get('tshirtgang_status');;
+			$data['tshirtgang_status'] = $this->config->get('tshirtgang_status');
 		}
 		
 		if (isset($this->request->post['delete_on_uninstall'])) {
@@ -808,8 +809,53 @@ class ControllerModuleTshirtgang extends Controller {
 	}
 
 	
-	
+	public function reportData($action=null) {
+		$this->load->model('setting/setting');
+		$tsg_setting = $this->model_setting_setting->getSetting('tshirtgang');
+		$api_key  = $tsg_setting['tshirtgang_api_key'];
+		
+		$this->load->language('module/tshirtgang');
+		$tsg_version  = $this->language->get('entry_tsg_version');
+		
+		$api_id   = "app-b4448ba35509b642695e"; //$tsg_setting['tshirtgang_api_id'];
+		$api_url  = "https://www.tshirtgang.com/api/_Private_PluginInstallData/";
+		
+		$XML = "<?xml version=\"1.0\" encoding=\"utf-8\"?>
+				<ProductForm>
+				   <Auth>
+				      <key>$api_key</key>
+				   </Auth>
+				   <SiteInfo> 
+				      <url>".$_SERVER['SERVER_NAME']."</url>
+				      <server_ip>".$_SERVER['SERVER_ADDR']."</server_ip>
+				      <plugin_name>opencart</plugin_name>
+				      <plugin_version>$tsg_version</plugin_version>
+				      <action>$action</action>
+				   </SiteInfo>
+				</ProductForm>";
+
+
+		$port = (preg_match("/^https/", $api_url) ? 443 : 80);
+		$ch = curl_init(); // initialize curl handle
+		curl_setopt($ch, CURLOPT_URL, $api_url); // set url to post to
+		curl_setopt($ch, CURLOPT_FAILONERROR, 1); // Fail on errors
+		//curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1); // allow redirects
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER,1); // return into a variable
+		curl_setopt($ch, CURLOPT_PORT, $port); //Set the port number
+		curl_setopt($ch, CURLOPT_TIMEOUT, 15); // times out after 15s
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $XML); // add POST fields
+		//curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
+		if($port==443) {
+			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+		}
+		$api_response = curl_exec($ch);
+		print_r($api_response);
+		//echo "<pre>";var_dump(htmlentities($api_response));echo "</pre>";die;
+		curl_close($ch);
+	}
 	protected function validate() {
+		
 		if (!$this->user->hasPermission('modify', 'module/tshirtgang')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
@@ -822,6 +868,13 @@ class ControllerModuleTshirtgang extends Controller {
 			$this->error['api_id'] = $this->language->get('error_api_id');
 		}
 		*/
+		$Status = $this->request->post['tshirtgang_status'];
+		if($Status == 1) {
+			$Action = "enabled";
+		} else {
+			$Action = "disabled";
+		}
+		$this->reportData($Action);
 		return !$this->error;
 	}
 	
