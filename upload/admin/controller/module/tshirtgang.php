@@ -832,6 +832,9 @@ class ControllerModuleTshirtgang extends Controller {
 				      <plugin_version>$tsg_version</plugin_version>
 				      <action>$action</action>
 				   </SiteInfo>
+				   <Extra>
+				      <appID>$api_id</appID>
+				   </Extra>
 				</ProductForm>";
 
 
